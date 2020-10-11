@@ -1,32 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
 
     public float playerSpeed;
-    public float jumpSpeed;
-
-    private bool isJumping;
+    public float jumpForce;
     private float move;
-    private Rigidbody2D rb;
-    // private Animator animator;
+    private bool isJumping;
+    private bool isDead;
+    private bool isCoroutineExecuting = false;
+    private Animator animator;
     private SpriteRenderer sprite;
-
+    private Rigidbody2D rb;
+    // Start is called before the first frame update
     void Start()
     {
+        //recuperando os componentes
         rb = GetComponent<Rigidbody2D>();
-        // animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
+    // Update is called once per frame
     void Update()
     {
-        // Recupera o input para teclas esquerda e direita
+        if (isDead)
+        {
+            if (!isCoroutineExecuting)
+            {
+                GoToGameOver(2);
+            }
+
+            return;
+        }
+
+        //pode ser -1, 0, 1
         move = Input.GetAxisRaw("Horizontal");
 
-        // Altera a orientação do sprite do personagem
+        //altera a orientação do player
         if (move < 0)
         {
             sprite.flipX = true;
@@ -36,20 +50,27 @@ public class PlayerController : MonoBehaviour
             sprite.flipX = false;
         }
 
-        // Move o personagem no eixo X
+        //move o personagem no eixo x
         rb.velocity = new Vector3(move * playerSpeed, rb.velocity.y);
 
-        // Altera o valor do atributo "velocity" no controlador de animações para mudar a animação do personagem
-        // animator.SetFloat("velocity", Mathf.Abs(rb.velocity.x));
+        //altera o valor do atributo velocity no controlador de animações para mudar a animação do personagem
+        animator.SetFloat("velocity", Mathf.Abs(rb.velocity.x));
 
-        // Adiciona um "Impulso" no personagem para pular
+        //adiciona um impulso no personagem para pular
         if (Input.GetButtonDown("Jump") && !isJumping)
         {
-            rb.AddForce(new Vector2(rb.velocity.x, jumpSpeed), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
             isJumping = true;
         }
     }
 
+    void FixedUpdate()
+    {
+        if (isDead)
+        {
+
+        }
+    }
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
@@ -57,24 +78,28 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
+        if (other.gameObject.CompareTag("KillerGround"))
+        {
+            isDead = true;
+            animator.SetBool("isDead", isDead);
+        }
+
         if (other.gameObject.CompareTag("MovingGround"))
         {
             this.transform.parent = other.transform;
             isJumping = false;
         }
+
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    IEnumerator GoToGameOver(float time)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (!isCoroutineExecuting)
         {
-            isJumping = true;
-        }
-
-        if (other.gameObject.CompareTag("MovingGround"))
-        {
-            this.transform.parent = null;
-            isJumping = false;
+            isCoroutineExecuting = true;
+            yield return new WaitForSeconds(time);
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+            isCoroutineExecuting = false;
         }
     }
 }

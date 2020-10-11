@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossController : MonoBehaviour
 {
     public float playerSpeed;
     public float jumpForce;
-
     private float move;
     private bool isJumping;
     private bool isDead;
+    private bool isCoroutineExecuting = false;
     private Animator animator;
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
@@ -25,7 +26,15 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead) return;
+        if (isDead)
+        {
+            if (!isCoroutineExecuting)
+            {
+                GoToGameOver(2);
+            }
+
+            return;
+        }
 
         //pode ser -1, 0, 1
         move = Input.GetAxisRaw("Horizontal");
@@ -54,6 +63,13 @@ public class BossController : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (isDead)
+        {
+
+        }
+    }
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
@@ -73,5 +89,16 @@ public class BossController : MonoBehaviour
             isJumping = false;
         }
 
+    }
+
+    IEnumerator GoToGameOver(float time)
+    {
+        if (!isCoroutineExecuting)
+        {
+            isCoroutineExecuting = true;
+            yield return new WaitForSeconds(time);
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+            isCoroutineExecuting = false;
+        }
     }
 }

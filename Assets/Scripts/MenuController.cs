@@ -22,6 +22,12 @@ public class MenuController : MonoBehaviour
 
     public void openScene(string sceneName)
     {
+        if (sceneName.Equals("Credits") || sceneName.Equals("MainMenu"))
+        {
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            return;
+        }
+
         PlayerPrefs.SetString("nextScene", sceneName);
         PlayerPrefs.Save();
         string a = PlayerPrefs.GetString("nextScene");
