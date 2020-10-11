@@ -22,7 +22,10 @@ public class MenuController : MonoBehaviour
 
     public void openScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        PlayerPrefs.SetString("nextScene", sceneName);
+        PlayerPrefs.Save();
+        string a = PlayerPrefs.GetString("nextScene");
+        SceneManager.LoadScene("Loading", LoadSceneMode.Single);
     }
 
     public void exit()
