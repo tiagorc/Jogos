@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-
     public float playerSpeed;
     public float jumpForce;
     private float move;
@@ -31,7 +30,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!isCoroutineExecuting)
             {
-                GoToGameOver(2);
+                SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
             }
 
             return;
@@ -64,13 +63,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        if (isDead)
-        {
-
-        }
-    }
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
@@ -90,16 +82,10 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
-    }
-
-    IEnumerator GoToGameOver(float time)
-    {
-        if (!isCoroutineExecuting)
+        if (other.gameObject.CompareTag("Win"))
         {
-            isCoroutineExecuting = true;
-            yield return new WaitForSeconds(time);
-            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
-            isCoroutineExecuting = false;
+            SceneManager.LoadScene("WinScene", LoadSceneMode.Single);
         }
+
     }
 }
