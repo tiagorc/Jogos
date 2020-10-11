@@ -22,7 +22,9 @@ public class MenuController : MonoBehaviour
 
     public void openScene(string sceneName)
     {
-        if (sceneName.Equals("Credits") || sceneName.Equals("MainMenu"))
+        if (sceneName.Equals("Credits")
+        || sceneName.Equals("MainMenu")
+        || sceneName.Equals("SelectLevel"))
         {
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
             return;
