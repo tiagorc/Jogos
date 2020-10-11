@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BossController.cs" />
+     <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\MovingObjects.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <None Include="Assets\Trash\20 Logos PSD\Fonts\chunkfiveex\SIL Open Font License 1.1.txt" />
@@ -671,6 +672,33 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+        <HintPath>/Users/eulercarvalho/Documents/POSIESB/Jogos/Trabalho Final/Impossible Maze/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
